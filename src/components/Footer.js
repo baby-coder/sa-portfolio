@@ -26,6 +26,19 @@ const FooterDiv = styled.div`
     width: 100%;
 `;
 
+const LinkInfo = styled.a`
+    font-weight: 600;
+    display: block;
+    font-size: 17px;
+    line-height: 140%;
+    color: rgb(123,123,123);
+    text-decoration: none;
+    &:hover {
+        color: rgb(246,16,103);
+        textDecoration: none;
+    }
+`;
+
 const footerContentStyles = makeStyles(theme => ({
     footerHeading: {
         fontSize: '42px',
@@ -48,15 +61,38 @@ const footerContentStyles = makeStyles(theme => ({
             textDecoration: 'underline'         
         }
     },
-    linkWidth: {
-    }
 }));
+
+// building redirect links and social media links
+const redirectInfo = [
+    { label: 'Home', path: '/', target: ''},
+    { label: 'Work', path: '/work', target: ''},
+    { label: 'About', path: '/about', target: ''},
+    { label: 'Projects', path: '/projects', target: ''}
+]
+
+const socialMediaLinks = [
+    { label: 'Twitter', path: 'https://twitter.com/subramanian_A', target: '_blank'},
+    { label: 'LinkedIn', path: 'https://www.linkedin.com/in/subramanianarunachalam/', target: '_blank'},
+    { label: 'GitHub', path: 'https://github.com/SubramanianArun', target: '_blank'},
+    { label: 'LeetCode', path: 'https://leetcode.com/subramanianarun/', target: '_blank'},
+]
+
+function PersonalBioContent( { data = [] }) {
+    return data.map(item => {
+        return (
+            <LinkInfo href={item.path} target={item.target} style={{ paddingBottom: '1rem'}}>
+                {item.label}
+            </LinkInfo>
+        )
+    })
+}
 
 function FooterContent () {
     const classes = footerContentStyles();
     // TODO: handle mouse hover transition
     return (
-        <Grid container spacing={10}>
+        <Grid container spacing={1}>
             <Grid item xs={6}>
                 <Typography variant='h2' className={classes.footerHeading}>
                     Do you have the next big idea? 
@@ -68,8 +104,11 @@ function FooterContent () {
                     subramanian.a@outlook.com
                 </Typography>
             </Grid>
-            <Grid item xs={6}>
-
+            <Grid item xs={2}>
+                <PersonalBioContent data={redirectInfo} />
+            </Grid>
+            <Grid item xs={2}>
+                <PersonalBioContent data={socialMediaLinks} />
             </Grid>
         </Grid>
     )
