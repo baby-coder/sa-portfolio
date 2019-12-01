@@ -1,11 +1,7 @@
 import React from 'react';
-import { fade, makeStyles, } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import { Box } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { callbackify } from 'util';
-
+import { makeStyles, } from '@material-ui/core/styles';
+import { Box, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -28,12 +24,14 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
-    cursor: 'pointer'
+    cursor: 'pointer',
+    color: '#fff'
   },
   subTitle: {
     margin: theme.spacing(1),
     padding: theme.spacing(1),
-    cursor: 'pointer'
+    cursor: 'pointer',
+    color: '#fff'
   }
 }));
 
@@ -45,18 +43,18 @@ export default function HeaderAppBar() {
     <div className={classes.grow}>
         <AppBar position="static" className={classes.appBar}>
             <Toolbar>
-            <Typography className={classes.title} variant="h6" noWrap>
+            <Typography className={classes.title} variant="h6" noWrap component={Link} to={'/'}>
                 SA.
             </Typography>
             <Box className={classes.box} >
-                <Typography className={classes.subTitle} variant="h6" noWrap>
+                <Typography className={classes.subTitle} variant="h6" noWrap component={Link} to='/work'>
                     Work
                 </Typography>
-                <Typography className={classes.subTitle} variant="h6" noWrap>
+                <Typography className={classes.subTitle} variant="h6" noWrap component={Link} to='/about'>
                     About
                 </Typography>
-                <Typography className={classes.subTitle} variant="h6" noWrap>
-                    Contact
+                <Typography className={classes.subTitle} variant="h6" noWrap component={Link} to='/projects'>
+                    Projects
                 </Typography>
             </Box>
             
