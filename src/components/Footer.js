@@ -22,7 +22,7 @@ const FooterDiv = styled.div`
     margin-right: auto;
     left: 0;
     bottom: 0;
-    minHeight: 60px;
+    min-height: 60px;
     width: 100%;
 `;
 
@@ -52,15 +52,16 @@ const footerContentStyles = makeStyles(theme => ({
         lineHeight: '140%',
         color: 'rgb(246,16,103)',
         textDecoration: 'none',
-        '&:hover': {
-            height: '3px',
-            bottom: 0,
-            left: 0,
-            color: 'rgb(246, 16, 103)',
-            transition: 'width 0.2s ease-out 0s',
-            textDecoration: 'underline'         
-        }
     },
+    testLink: {
+        height: '3px',
+        width: '100%',
+        bottom: 0,
+        left: 0,
+        background: 'rgb(246, 16, 103)',
+        transition: 'width .3s ease-out 0s',
+        display: 'block',
+    }
 }));
 
 // building redirect links and social media links
@@ -91,6 +92,12 @@ function PersonalBioContent( { data = [] }) {
 function FooterContent () {
     const classes = footerContentStyles();
     // TODO: handle mouse hover transition
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    function handleHover() {
+        setIsHovered(prevState => !prevState);
+    }
     return (
         <Grid container spacing={1}>
             <Grid item xs={6}>
@@ -100,9 +107,10 @@ function FooterContent () {
                 <Typography variant='subtitle1'>
                     Send me an email and let's talk. I respond within 1-2 working days.  
                 </Typography>
-                <Typography variant='subtitle1' component={Link} className={classes.email}>
+                <Typography variant='subtitle1' component={Link} className={classes.email} onMouseEnter={handleHover} onMouseLeave={handleHover}>
                     subramanian.a@outlook.com
                 </Typography>
+                {isHovered && <div className={classes.testLink} /> }
             </Grid>
             <Grid item xs={2}>
                 <PersonalBioContent data={redirectInfo} />

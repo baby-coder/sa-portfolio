@@ -14,8 +14,12 @@ function App() {
          <Route path='/work' component={Work} />
          <Route path='/about' component={About} />
          <Route path='/projects' component={Projects} />
-       </Switch>
-       <Footer />  
+      </Switch>
+      <Footer>
+        <p style={{paddingTop: '2rem'}}>
+          {'\u00A9'} 2019. Subramanian Arunachalam
+        </p>
+      </Footer>  
     </div>
   );
 }
