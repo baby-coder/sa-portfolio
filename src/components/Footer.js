@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-
-
+import './footer.css';
 
 const FooterWrapper = styled.div`
     display: block;
@@ -39,6 +38,19 @@ const LinkInfo = styled.a`
     }
 `;
 
+const HoverEffect = ({text}) => {
+    return (
+        <a className="svg-wrapper" href='mailto:subramanian.a@outlook.com'>
+            <svg height="30" width="250" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+                <g>
+                <rect className="shape" height="30" width="250" />
+                {text}
+                </g>  
+            </svg>
+        </a>
+    )
+}
+
 const footerContentStyles = makeStyles(theme => ({
     footerHeading: {
         fontSize: '42px',
@@ -52,16 +64,8 @@ const footerContentStyles = makeStyles(theme => ({
         lineHeight: '140%',
         color: 'rgb(246,16,103)',
         textDecoration: 'none',
+        width: '100%'
     },
-    testLink: {
-        height: '3px',
-        width: '100%',
-        bottom: 0,
-        left: 0,
-        background: 'rgb(246, 16, 103)',
-        transition: 'width .3s ease-out 0s',
-        display: 'block',
-    }
 }));
 
 // building redirect links and social media links
@@ -82,7 +86,7 @@ const socialMediaLinks = [
 function PersonalBioContent( { data = [] }) {
     return data.map(item => {
         return (
-            <LinkInfo href={item.path} target={item.target} style={{ paddingBottom: '1rem'}}>
+            <LinkInfo href={item.path} target={item.target} style={{ paddingBottom: '1rem'}} key={item.label}>
                 {item.label}
             </LinkInfo>
         )
@@ -93,24 +97,26 @@ function FooterContent () {
     const classes = footerContentStyles();
     // TODO: handle mouse hover transition
 
-    const [isHovered, setIsHovered] = useState(false);
+    // const [isHovered, setIsHovered] = useState(false);
 
-    function handleHover() {
-        setIsHovered(prevState => !prevState);
-    }
+    // function handleHover() {
+    //     setIsHovered(prevState => !prevState);
+    // }
     return (
         <Grid container spacing={1}>
             <Grid item xs={6}>
                 <Typography variant='h2' className={classes.footerHeading}>
-                    Do you have the next big idea? 
+                    Do you have the next big idea?
                 </Typography>
                 <Typography variant='subtitle1'>
-                    Send me an email and let's talk. I respond within 1-2 working days.  
+                    Send me an email and let's talk. I respond within 1-2 working days.
                 </Typography>
-                <Typography variant='subtitle1' component={Link} className={classes.email} onMouseEnter={handleHover} onMouseLeave={handleHover}>
-                    subramanian.a@outlook.com
-                </Typography>
-                {isHovered && <div className={classes.testLink} /> }
+
+                    {/* <Typography variant='subtitle1' component={Link} className={classes.email} >
+                        subramanian.a@outlook.com
+                        <HoverEffect />
+                    </Typography> */}
+                    <HoverEffect  text='subramanian.a@outlook.com'/>
             </Grid>
             <Grid item xs={2}>
                 <PersonalBioContent data={redirectInfo} />
